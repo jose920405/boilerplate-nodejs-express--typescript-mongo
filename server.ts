@@ -1,8 +1,8 @@
-import express from 'express';
 import bodyParser from 'body-parser';
+import express from 'express';
 
 // Router
-import router from './network/routes';
+import router from './helpers/routes';
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,5 +14,6 @@ const port = 3000;
 app.use('/app', express.static('public'));
 
 app.listen(port, () => {
+  // tslint:disable-next-line
   console.log(`This app is listening in ${port}.. Go to => http://localhost:${port}`);
 });

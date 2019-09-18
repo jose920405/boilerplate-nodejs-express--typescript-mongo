@@ -1,23 +1,46 @@
-interface addMessageRes {
-  user: string;
-  message: string;
-  date: Date;
-}
+// Libraries
+import to from 'await-to-js';
 
-const addMessage = (user: string, message: string): Promise<addMessageRes> => {
-  return new Promise((resolve, reject) => {
-    if (!user || !message) {
-      return reject('Data is not correct');
-    }
-    const fullMessage = {
-      user,
-      message,
-      date: new Date(),
+import * as store from './store';
+
+const addMessage = async (user: string, message: string): Promise<any> => {
+  if (!user || !message) {
+    throw {
+      message: 'Data is not correct',
     };
-    resolve(fullMessage);
-  });
-}
+  }
+
+  const fullMessage = {
+    date: new Date(),
+    message,
+    user,
+  };
+
+  const [error, response] = await to(store.addMessages(fullMessage));
+  if (error) {
+    throw {
+      message: error || 'Error Saving Message in BD',
+    };
+  }
+  return response;
+};
+
+const getMessages = async () => {
+  return store.getMessages();
+};
+
+const updateMessage = async (id: string, newMessage: string) => {
+  if (!id || !newMessage) {
+    throw {
+      message: !id ? 'Invalid id to update' : !newMessage && 'Invalid message to update',
+    };
+  }
+
+  return store.updateMessageText(id, newMessage);
+};
 
 export {
-  addMessage
+  addMessage,
+  getMessages,
+  updateMessage,
 };
