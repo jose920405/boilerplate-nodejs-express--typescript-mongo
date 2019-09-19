@@ -1,11 +1,12 @@
 import { Document } from 'mongoose';
 
 declare global {
-  interface IAddMessageRes {
+  interface IMessages {
+    chat: string;
     date: Date;
     message: string;
     user: string;
   }
 
-  interface IAddMessageResMongo extends Document, IAddMessageRes { }
+  interface IMessageResMongo extends Document, IMessages { }
 }

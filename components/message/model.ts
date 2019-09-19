@@ -3,6 +3,10 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const mySchema = new Schema({
+  chat: {
+    ref: 'Chat',
+    type: Schema.Types.ObjectId,
+  },
   date: {
     required: true,
     type: Date,
@@ -12,9 +16,10 @@ const mySchema = new Schema({
     type: String,
   },
   user: {
+    ref: 'User',
     required: true,
-    type: String,
+    type: Schema.Types.ObjectId,
   },
 });
 
-export default mongoose.model<IAddMessageResMongo>('Message', mySchema);
+export default mongoose.model<IMessageResMongo>('Message', mySchema);

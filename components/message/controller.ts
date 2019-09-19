@@ -3,7 +3,7 @@ import to from 'await-to-js';
 
 import * as store from './store';
 
-const addMessage = async (user: string, message: string): Promise<any> => {
+export const addMessage = async (user: string, chat: string, message: string): Promise<any> => {
   if (!user || !message) {
     throw {
       message: 'Data is not correct',
@@ -11,6 +11,7 @@ const addMessage = async (user: string, message: string): Promise<any> => {
   }
 
   const fullMessage = {
+    chat,
     date: new Date(),
     message,
     user,
@@ -25,11 +26,11 @@ const addMessage = async (user: string, message: string): Promise<any> => {
   return response;
 };
 
-const getMessages = async () => {
-  return store.getMessages();
+export const getMessages = async (query: IMessages) => {
+  return store.getMessages(query);
 };
 
-const updateMessage = async (id: string, newMessage: string) => {
+export const updateMessage = async (id: string, newMessage: string) => {
   if (!id || !newMessage) {
     throw {
       message: !id ? 'Invalid id to update' : !newMessage && 'Invalid message to update',
@@ -39,8 +40,12 @@ const updateMessage = async (id: string, newMessage: string) => {
   return store.updateMessageText(id, newMessage);
 };
 
-export {
-  addMessage,
-  getMessages,
-  updateMessage,
+export const deleteMessage = async (id: string) => {
+  if (!id) {
+    throw {
+      message: 'Id not provided',
+    };
+  }
+
+  return store.deleteMessageText(id);
 };

@@ -1,9 +1,13 @@
-import express from 'express';
+import { Application } from 'express';
 
-import messages from '../components/messages/network';
+import chat from '../components/chat/network';
+import message from '../components/message/network';
+import user from '../components/user/network';
 
-const routes = (app: ReturnType<typeof express>) => {
-  app.use('/messages', messages);
+const routes = (app: Application) => {
+  app.use('/messages', message);
+  app.use('/users', user);
+  app.use('/chats', chat);
 };
 
 export default routes;
