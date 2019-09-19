@@ -4,12 +4,19 @@ import express from 'express';
 // Router
 import router from './helpers/routes';
 
+// Db
+import db from './db';
+
+// Consts
+const port = 3000;
+
+// Express connection
 const app = express();
 app.use(bodyParser.json());
 router(app);
 
-// Consts
-const port = 3000;
+// Db Connection
+db();
 
 app.use('/app', express.static('public'));
 
