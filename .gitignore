@@ -5,6 +5,9 @@
 ### Node ###
 package-lock.json
 
+# Files
+public/files
+
 # Logs
 logs
 *.log

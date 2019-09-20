@@ -1,6 +1,7 @@
 // Libraries
 import to from 'await-to-js';
 import { Router } from 'express';
+import multer from 'multer';
 
 // Helpers
 import * as helperResponse from '../../helpers/response';
@@ -11,6 +12,10 @@ import * as controller from './controller';
 // Router
 const router = Router();
 
+const upload = multer({
+  dest: 'public/files',
+});
+
 router.get('/', async (req, res) => {
   const [error, messagesList] = await to(controller.getMessages(req.query));
   if (error) {
@@ -20,9 +25,9 @@ router.get('/', async (req, res) => {
   return helperResponse.successRes(req, res, messagesList);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', upload.single('image'), async (req, res) => {
   const body = req.body;
-  const [error, messageResponse] = await to(controller.addMessage(body.user, body.chat, body.message));
+  const [error, messageResponse] = await to(controller.addMessage(body.user, body.chat, body.message, req.file));
   if (error) {
     return helperResponse.errorRes(req, res, error, 400);
   }

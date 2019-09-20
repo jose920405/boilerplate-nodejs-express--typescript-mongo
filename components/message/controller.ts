@@ -3,16 +3,22 @@ import to from 'await-to-js';
 
 import * as store from './store';
 
-export const addMessage = async (user: string, chat: string, message: string): Promise<any> => {
+export const addMessage = async (user: string, chat: string, message: string, file: Express.Multer.File): Promise<any> => {
   if (!user || !message) {
     throw {
       message: 'Data is not correct',
     };
   }
 
-  const fullMessage = {
+  let fileUrl = '';
+  if (file) {
+    fileUrl = 'http://localhost:3000/app/files/' + file.filename;
+  }
+
+  const fullMessage: IMessages = {
     chat,
     date: new Date(),
+    fileUrl,
     message,
     user,
   };

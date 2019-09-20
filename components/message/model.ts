@@ -11,6 +11,9 @@ const mySchema = new Schema({
     required: true,
     type: Date,
   },
+  fileUrl: {
+    type: String,
+  },
   message: {
     required: true,
     type: String,

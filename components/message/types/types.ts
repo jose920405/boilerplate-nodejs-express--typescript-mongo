@@ -4,6 +4,7 @@ declare global {
   interface IMessages {
     chat: string;
     date: Date;
+    fileUrl: string;
     message: string;
     user: string;
   }
