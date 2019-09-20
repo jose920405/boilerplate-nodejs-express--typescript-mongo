@@ -1,6 +1,9 @@
 // Libraries
 import to from 'await-to-js';
 
+// Config
+import config from '../../config';
+
 import * as socketHelper from '../../helpers/socket';
 import * as store from './store';
 
@@ -13,7 +16,7 @@ export const addMessage = async (user: string, chat: string, message: string, fi
 
   let fileUrl = '';
   if (file) {
-    fileUrl = 'http://localhost:3000/app/files/' + file.filename;
+    fileUrl = `${config.HOST}:${config.PORT}/${config.PUBLIC_ROUTE}/${config.FILES_ROUTE}/${file.filename}`;
   }
 
   const fullMessage: IMessages = {

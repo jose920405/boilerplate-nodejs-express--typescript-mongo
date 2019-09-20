@@ -2,9 +2,12 @@
 import to from 'await-to-js';
 import mongoose from 'mongoose';
 
+// Config
+import config from './config';
+
 // Const
-const mongoUrl = 'mongodb+srv://jose:Jose920405123@cluster0-iykys.mongodb.net/test?retryWrites=true&w=majority'; // from `cloud.mongodb.com`
-const mongoLocalUrl = 'mongodb://localhost:27017/boilerplate-bd';
+// const mongoUrl = config.DB_CLOUD_URL;
+const mongoLocalUrl = config.DB_URL;
 
 mongoose.Promise = global.Promise;
 

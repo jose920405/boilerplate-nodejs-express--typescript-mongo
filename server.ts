@@ -7,11 +7,14 @@ import http from 'http';
 import router from './helpers/routes';
 import * as socketHelper from './helpers/socket';
 
+// Config
+import config from './config';
+
 // Db
 import db from './db';
 
 // Consts
-const port = 3000;
+const port = config.PORT;
 
 // Express connection
 const app = express();
@@ -32,9 +35,9 @@ router(app);
 // Socket Connection
 socketHelper.connect(server);
 
-app.use('/app', express.static('public'));
+app.use(`/${config.PUBLIC_ROUTE}`, express.static('public'));
 
 server.listen(port, () => {
   // tslint:disable-next-line
-  console.log(`This app is listening in ${port}.. Go to => http://localhost:${port}`);
+  console.log(`This app is listening in ${port}.. Go to => ${config.HOST}:${port}`);
 });

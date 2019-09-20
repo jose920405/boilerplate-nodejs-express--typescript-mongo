@@ -9,11 +9,14 @@ import * as helperResponse from '../../helpers/response';
 // Controller
 import * as controller from './controller';
 
+// Config
+import config from '../../config';
+
 // Router
 const router = Router();
 
 const upload = multer({
-  dest: 'public/files',
+  dest: `public/${config.FILES_ROUTE}`,
 });
 
 router.get('/', async (req, res) => {
