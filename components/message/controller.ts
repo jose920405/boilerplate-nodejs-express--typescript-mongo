@@ -1,6 +1,7 @@
 // Libraries
 import to from 'await-to-js';
 
+import * as socketHelper from '../../helpers/socket';
 import * as store from './store';
 
 export const addMessage = async (user: string, chat: string, message: string, file: Express.Multer.File): Promise<any> => {
@@ -29,6 +30,11 @@ export const addMessage = async (user: string, chat: string, message: string, fi
       message: error || 'Error Saving Message in BD',
     };
   }
+
+  if (socketHelper.socket && socketHelper.socket.io) {
+    socketHelper.socket.io.emit('message', response);
+  }
+
   return response;
 };
 

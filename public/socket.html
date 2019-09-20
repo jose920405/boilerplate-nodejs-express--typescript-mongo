@@ -1,0 +1,22 @@
+<html>
+
+<head>
+  <script src="/socket.io/socket.io.js">  </script>
+</head>
+
+<body>
+  <h1>CHECK IN CONSOLE PRESS CMD+OPTION+j</h1>
+</body>
+
+<script>
+  var socket = io.connect('http://localhost:3000', {
+    forceNew: true,
+  })
+
+  socket.on('message', function (data) {
+    console.log('17 HERE LISTEN message IN SOCKET ON >>>>>>>>> ');
+    console.log('18 data >>> ', data);
+  });
+</script>
+
+</html>
