@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import express from 'express';
 import http from 'http';
 
@@ -24,6 +25,9 @@ db();
 
 // Routing Manage
 router(app);
+
+// Cors for enable request from frontend
+// app.use(cors()); // Uncoment to prevent CROSS ORIGIN problems.
 
 // Socket Connection
 socketHelper.connect(server);
