@@ -1,5 +1,5 @@
 import bodyParser from 'body-parser';
-import cors from 'cors';
+// import cors from 'cors';
 import express from 'express';
 import http from 'http';
 
